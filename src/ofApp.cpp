@@ -22,11 +22,13 @@ void ofApp::draw(){
 void ofApp::drawStripes() {
     ofSetColor(ofColor::black);
     ofSetLineWidth(3.0);
+    ofNoFill();
     for(int i = -50; i < 50; i++) {
         ofPushMatrix();
         ofTranslate(i * 20, 0);
         ofRotate(i * 5);
-        ofDrawLine(0, -100, 0, 100);
+        ofScale(6, 6);
+        ofDrawTriangle(0, 0, -50, 100, 50, 100);
         ofPopMatrix();
         
     }
