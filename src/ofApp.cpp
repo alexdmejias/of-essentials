@@ -7,6 +7,14 @@ void ofApp::setup(){
     gui.add(countX.setup("countX", 50, 0, 200));
     gui.add(stepX.setup("StepX", 20, 0, 200));
     gui.add(twistX.setup("Twist X", 5 , -45, 45));
+    
+    globalGroup.setup("Global");
+    globalGroup.add(Scale.setup("Scale", 1, 0.0, 1));
+    globalGroup.add(Rotate.setup("Rotate", 0, -180, 180));
+    globalGroup.add(Background.setup("Background", 255, 0, 255));
+    gui.add(&globalGroup);
+    
+    
     gui.loadFromFile("settings.xml");    
 }
 
@@ -17,8 +25,14 @@ void ofApp::update(){
 
 //--------------------------------------------------------------
 void ofApp::draw(){
+    ofBackground(Background);
     ofPushMatrix();
     ofTranslate(ofGetWidth() / 2, ofGetHeight() /2 );
+    
+    float Scl = pow(Scale, 4.0f);
+    ofScale(Scl, Scl);
+    ofRotate(Rotate);
+    
     ofApp::drawStripes();
     ofPopMatrix();
     

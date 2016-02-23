@@ -14,6 +14,12 @@ class ofApp : public ofBaseApp{
         ofxIntSlider countX;
         ofxFloatSlider stepX;
         ofxFloatSlider twistX;
+    
+        ofxGuiGroup globalGroup;
+        ofxFloatSlider Scale;
+        ofxFloatSlider Rotate;
+        ofxFloatSlider Background;
+    
         void exit();
 		
 };
