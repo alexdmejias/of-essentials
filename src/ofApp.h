@@ -9,6 +9,7 @@ class ofApp : public ofBaseApp{
 		void setup();
 		void update();
 		void draw();
+        void keyPressed(int key);
         void drawStripes();
         ofxPanel gui;
         ofxIntSlider countX;
@@ -26,7 +27,7 @@ class ofApp : public ofBaseApp{
         ofxColorSlider color;
         ofxToggle filled, type;
     
-    
+        bool showGui;
     
         void exit();
 		

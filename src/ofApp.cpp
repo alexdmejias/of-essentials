@@ -23,7 +23,9 @@ void ofApp::setup(){
     primGroup.add(type.setup("Type", false));
     gui.add(&primGroup);
     
-    gui.loadFromFile("settings.xml");    
+    gui.loadFromFile("settings.xml");
+    
+    showGui = true;
 }
 
 //--------------------------------------------------------------
@@ -44,7 +46,37 @@ void ofApp::draw(){
     ofApp::drawStripes();
     ofPopMatrix();
     
-    gui.draw();
+    if (showGui) {
+        gui.draw();        
+    }
+
+}
+
+void ofApp::keyPressed(int key) {
+    if(key == 'z' ) {
+        showGui = !showGui;
+    }
+    
+    if(key == OF_KEY_RETURN) {
+        ofSaveScreen("screenshot.png");
+    }
+    
+    if(key == 's') {
+        ofFileDialogResult res;
+        
+        res = ofSystemSaveDialog("preset.xml", "Saving Preset");
+        if (res.bSuccess) {
+            gui.saveToFile(res.filePath);
+        }
+    }
+    
+    if (key == 'l') {
+        ofFileDialogResult res;
+        res = ofSystemLoadDialog("Loading Preset");
+        if (res.bSuccess) {
+            gui.loadFromFile(res.filePath);
+        }
+    }
 }
 
 
