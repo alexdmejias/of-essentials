@@ -14,6 +14,14 @@ void ofApp::setup(){
     globalGroup.add(Background.setup("Background", 255, 0, 255));
     gui.add(&globalGroup);
     
+    primGroup.setup("Primitive");
+    primGroup.add(shiftY.setup("ShiftY", 0.0, -1000.0, 1000.0));
+    primGroup.add(rotate.setup("Rotate", 0.0, -180.0, 180.0));
+    primGroup.add(size.setup("Size", ofVec2f(6, 6), ofVec2f(0, 0), ofVec2f(20, 20)));
+    primGroup.add(color.setup("Color", ofColor::black, ofColor(0, 0, 0, 0), ofColor::white));
+    primGroup.add(filled.setup("Filled", false));
+    primGroup.add(type.setup("Type", false));
+    gui.add(&primGroup);
     
     gui.loadFromFile("settings.xml");    
 }
@@ -41,15 +49,34 @@ void ofApp::draw(){
 
 
 void ofApp::drawStripes() {
-    ofSetColor(ofColor::black);
-    ofSetLineWidth(3.0);
-    ofNoFill();
+    ofSetColor(color);
+    ofSetLineWidth(1);
+    
+    if( filled) {
+        ofFill();
+    } else {
+        ofNoFill();
+    }
+    
+    
     for(int i = -countX; i <= countX; i++) {
         ofPushMatrix();
         ofTranslate(i * stepX, 0);
         ofRotate(i * twistX);
-        ofScale(6, 6);
-        ofDrawTriangle(0, 0, -50, 100, 50, 100);
+        
+        ofTranslate(0, shiftY);
+        ofRotate(rotate);
+        ofScale(size->x, size->y);
+        
+        if (type) {
+            ofDrawRectangle(-50, -50, 100, 100);
+        } else {
+            ofDrawTriangle(0, 0, -50, 100, 50, 100);
+        }
+    
+//        ofScale(6, 6);
+//        ofDrawTriangle(0, 0, -50, 100, 50, 100);
+        
         ofPopMatrix();
         
     }

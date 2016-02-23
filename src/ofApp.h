@@ -20,6 +20,14 @@ class ofApp : public ofBaseApp{
         ofxFloatSlider Rotate;
         ofxFloatSlider Background;
     
+        ofxGuiGroup primGroup;
+        ofxFloatSlider shiftY, rotate;
+        ofxVec2Slider size;
+        ofxColorSlider color;
+        ofxToggle filled, type;
+    
+    
+    
         void exit();
 		
 };
